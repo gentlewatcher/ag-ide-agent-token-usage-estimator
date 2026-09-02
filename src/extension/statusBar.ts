@@ -151,7 +151,8 @@ export class UsageStatusBarManager implements vscode.Disposable {
       if (quotaSnapshot && quotaSnapshot.models.length > 0) {
         const primary = quotaSnapshot.models[0]
         if (primary.remainingPercentage !== undefined) {
-          const pct = Math.round(primary.remainingPercentage)
+          const raw = primary.remainingPercentage
+          const pct = Math.round(raw <= 1.0 ? raw * 100 : raw)
           quotaTag = ` | $(dashboard) ${pct}%`
         }
       }
@@ -186,11 +187,12 @@ export class UsageStatusBarManager implements vscode.Disposable {
 
     if (quota && quota.models.length > 0) {
       md.appendMarkdown(`\n---\n\n### 🤖 Model Quotas\n\n`)
-      for (const m of quota.models.slice(0, 3)) {
+      for (const m of quota.models.slice(0, 5)) {
         if (m.remainingPercentage !== undefined) {
-          const pct = Math.round(m.remainingPercentage)
-          const bar = pct > 50 ? '🟢' : pct > 20 ? '🟡' : '🔴'
-          const resetStr = m.resetTime ? ` (resets ${new Date(m.resetTime).toLocaleTimeString()})` : ''
+          const raw = m.remainingPercentage
+          const pct = Math.round(raw <= 1.0 ? raw * 100 : raw)
+          const bar = pct >= 75 ? '🟢' : pct >= 40 ? '🟡' : '🔴'
+          const resetStr = m.resetTime ? ` (resets ${new Date(m.resetTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })})` : ''
           md.appendMarkdown(`${bar} **${m.label}**: ${pct}% remaining${resetStr}\n\n`)
         }
       }

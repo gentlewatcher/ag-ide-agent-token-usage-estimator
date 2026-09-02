@@ -42,8 +42,10 @@ export function isModelUnused(model: ModelQuotaInfo): boolean {
   }
   
   // Check if quota is full (100% or very close)
-  if (model.remainingPercentage < FULL_QUOTA_THRESHOLD) {
-    debug('reset-detector', `${model.modelId}: Not full (${model.remainingPercentage}%)`)
+  const rawPct = model.remainingPercentage
+  const pct = Math.round(rawPct <= 1.0 ? rawPct * 100 : rawPct)
+  if (pct < FULL_QUOTA_THRESHOLD) {
+    debug('reset-detector', `${model.modelId}: Not full (${pct}%)`)
     return false
   }
   
