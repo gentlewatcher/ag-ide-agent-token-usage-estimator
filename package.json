@@ -98,10 +98,13 @@
     "cli",
     "google-cloud-code"
   ],
-  "author": "",
-  "license": "MIT",
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "vscode": "^1.80.0"
   },
   "files": [
     "dist",
