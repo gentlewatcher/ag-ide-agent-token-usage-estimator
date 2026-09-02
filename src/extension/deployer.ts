@@ -9,7 +9,9 @@ import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
 
 function findProjectRootDir(): string {
-  let current = path.dirname(fileURLToPath(import.meta.url))
+  let current = typeof __dirname !== 'undefined'
+    ? __dirname
+    : (typeof import.meta !== 'undefined' && import.meta?.url ? path.dirname(fileURLToPath(import.meta.url)) : process.cwd())
   for (let i = 0; i < 6; i++) {
     if (fs.existsSync(path.join(current, 'package.json'))) {
       return current

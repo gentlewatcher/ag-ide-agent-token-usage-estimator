@@ -3,7 +3,7 @@
  */
 
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
-import open from 'open'
+import { openUrl as open } from '../utils/open-url.js'
 import { getSettings, updateSettings, openSettingsInEditor } from './storage.js'
 import { getModelRatios } from '../estimation/model-ratios.js'
 import { estimateUsage } from '../estimation/estimator.js'

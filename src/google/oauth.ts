@@ -4,7 +4,7 @@
 
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
 import { URL, URLSearchParams } from 'node:url'
-import open from 'open'
+import { openUrl as open } from '../utils/open-url.js'
 import inquirer from 'inquirer'
 import { debug, info, error as logError } from '../core/logger.js'
 import { getAccountManager } from '../accounts/index.js'
