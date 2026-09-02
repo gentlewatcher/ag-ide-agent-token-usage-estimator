@@ -8,9 +8,18 @@ import os from 'os'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const rootDir = path.resolve(__dirname, '../..')
+function findProjectRootDir(): string {
+  let current = path.dirname(fileURLToPath(import.meta.url))
+  for (let i = 0; i < 6; i++) {
+    if (fs.existsSync(path.join(current, 'package.json'))) {
+      return current
+    }
+    const parent = path.dirname(current)
+    if (parent === current) break
+    current = parent
+  }
+  return process.cwd()
+}
 
 export interface DeployOptions {
   cleanOnly?: boolean
@@ -18,6 +27,7 @@ export interface DeployOptions {
 }
 
 export function deployExtension(options: DeployOptions = {}): void {
+  const rootDir = findProjectRootDir()
   console.log('🚀 [Antigravity Extension Deployer] Starting clean extension deployment...')
 
   // 1. Build project if not skipped
