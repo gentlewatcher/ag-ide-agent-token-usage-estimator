@@ -21,9 +21,8 @@ export class UsageStatusBarManager implements vscode.Disposable {
 
   constructor() {
     this.statusBarItem = vscode.window.createStatusBarItem(
-      'agUsageEstimator',
       vscode.StatusBarAlignment.Right,
-      100
+      99
     )
     this.statusBarItem.name = 'AG Usage & Token Estimator'
     this.statusBarItem.text = '⚡ Estimating...'
