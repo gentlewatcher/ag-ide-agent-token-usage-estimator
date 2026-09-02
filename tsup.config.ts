@@ -16,12 +16,13 @@ export default defineConfig([
   },
   {
     entry: { extension: 'src/extension.ts' },
-    format: ['esm', 'cjs'],
+    format: ['cjs'],
     target: 'node20',
     outDir: 'dist',
     clean: false,
     sourcemap: true,
     external: ['vscode'],
-    shims: true
+    noExternal: [/^(?!vscode$).*$/],
+    shims: false
   }
 ])
