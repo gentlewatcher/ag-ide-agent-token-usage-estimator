@@ -21,9 +21,13 @@ export class UsageStatusBarManager implements vscode.Disposable {
 
   constructor() {
     this.statusBarItem = vscode.window.createStatusBarItem(
+      'agUsageEstimator',
       vscode.StatusBarAlignment.Right,
       100
     )
+    this.statusBarItem.name = 'AG Usage & Token Estimator'
+    this.statusBarItem.text = '⚡ Estimating...'
+    this.statusBarItem.tooltip = 'Antigravity Usage & Pre-Execution Estimator'
     this.statusBarItem.command = 'antigravityUsage.statusBarMenu'
 
     // Register active editor and document listeners
