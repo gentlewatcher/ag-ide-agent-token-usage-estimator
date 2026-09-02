@@ -15,8 +15,7 @@
     "ag-estimator": "dist/index.js"
   },
   "activationEvents": [
-    "onStartupFinished",
-    "*"
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [

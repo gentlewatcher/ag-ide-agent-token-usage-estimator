@@ -2,7 +2,7 @@
  * CLI command for managing Antigravity IDE extension installation and deployment
  */
 
-import { deployExtension } from '../../scripts/deploy-extension.js'
+import { deployExtension } from '../extension/deployer.js'
 
 export async function extensionCommand(
   action?: string,
