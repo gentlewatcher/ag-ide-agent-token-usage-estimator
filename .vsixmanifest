@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 	<Metadata>
-		<Identity Language="en-US" Id="ag-ide-agent-token-usage-estimator" Version="0.2.9" Publisher="zenpasha" />
-		<DisplayName>Antigravity Usage &amp; Pre-Execution Token Estimator</DisplayName>
+		<Identity Language="en-US" Id="ag-ide-agent-token-usage-estimator" Version="1.0.0" Publisher="zenpasha" />
+		<DisplayName>AG IDE Agent Token Usage Estimator</DisplayName>
 		<Description xml:space="preserve">Real-time pre-execution token/tool estimations, model quota indicators, and settings dashboard for Antigravity IDE</Description>
 		<Tags>antigravity,quota,gemini,claude,status bar,token estimation,agent,ai</Tags>
 		<Categories>Other,Programming Languages</Categories>
