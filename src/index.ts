@@ -291,6 +291,28 @@ program
   .option('-x, --execute <actionId>', 'Directly execute a menu action ID')
   .action((options) => menuCommand(options))
 
+// Extension deployment & cleaning command
+import { extensionCommand } from './commands/extension.js'
+
+const extCmd = program
+  .command('extension')
+  .description('Manage, clean, or deploy the Antigravity IDE Status Bar extension')
+  .option('--clean', 'Remove old installed extension versions from Antigravity IDE')
+  .option('--deploy', 'Build and deploy the latest extension into Antigravity IDE')
+  .option('--skip-build', 'Skip building dist bundles before deploying')
+  .action((options) => extensionCommand(undefined, options))
+
+extCmd
+  .command('deploy')
+  .description('Build and deploy the latest extension into Antigravity IDE')
+  .option('--skip-build', 'Skip building dist bundles before deploying')
+  .action((options) => extensionCommand('deploy', options))
+
+extCmd
+  .command('clean')
+  .description('Remove all installed versions of this extension from Antigravity IDE')
+  .action(() => extensionCommand('clean', { clean: true }))
+
 // Parse and run
 program.parse()
 
