@@ -1,11 +1,87 @@
 {
   "name": "antigravity-usage",
+  "displayName": "Antigravity Usage & Pre-Execution Token Estimator",
+  "publisher": "zenpasha",
   "version": "0.2.9",
-  "description": "CLI tool to check Antigravity model quota via Google Cloud Code API",
+  "description": "Real-time pre-execution token/tool estimations, model quota indicators, and settings dashboard for Antigravity IDE",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/extension.js",
   "bin": {
     "antigravity-usage": "dist/index.js"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "antigravityUsage.statusBarMenu",
+        "title": "Antigravity Usage: Show Quick Actions Menu",
+        "category": "Antigravity Usage"
+      },
+      {
+        "command": "antigravityUsage.refreshQuota",
+        "title": "Antigravity Usage: Refresh Model Quotas & Estimation",
+        "category": "Antigravity Usage"
+      },
+      {
+        "command": "antigravityUsage.openSettingsFile",
+        "title": "Antigravity Usage: Open Settings File in Editor",
+        "category": "Antigravity Usage"
+      },
+      {
+        "command": "antigravityUsage.openSettingsWeb",
+        "title": "Antigravity Usage: Open Web Settings Dashboard",
+        "category": "Antigravity Usage"
+      },
+      {
+        "command": "antigravityUsage.triggerWakeup",
+        "title": "Antigravity Usage: Trigger Model Wakeup / Warmup",
+        "category": "Antigravity Usage"
+      }
+    ],
+    "configuration": {
+      "title": "Antigravity Usage & Estimator",
+      "properties": {
+        "antigravityUsage.defaultModel": {
+          "type": "string",
+          "default": "gemini-3.7-flash",
+          "enum": [
+            "gemini-3.7-flash",
+            "gemini-2.5-flash",
+            "gemini-3.7-pro",
+            "gemini-2.5-pro",
+            "claude-3-7-sonnet",
+            "claude-3-5-sonnet",
+            "gpt-4o",
+            "deepseek-r1",
+            "gemma-2"
+          ],
+          "description": "Default target model for pre-execution token and tool call estimation."
+        },
+        "antigravityUsage.statusBarDisplayMode": {
+          "type": "string",
+          "default": "detailed",
+          "enum": ["detailed", "compact", "model-tag", "minimal"],
+          "description": "Format style of the badge displayed in the Antigravity IDE bottom status bar."
+        },
+        "antigravityUsage.tokenWarningThreshold": {
+          "type": "number",
+          "default": 100000,
+          "description": "Estimated token threshold that triggers a warning badge highlight in the status bar."
+        },
+        "antigravityUsage.refreshInterval": {
+          "type": "number",
+          "default": 60,
+          "description": "Interval in seconds to automatically refresh model quotas in the status bar (0 to disable)."
+        },
+        "antigravityUsage.autoSyncTranscripts": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically discover and index agent conversation transcripts in the background."
+        }
+      }
+    }
   },
   "scripts": {
     "build": "tsup",
@@ -42,6 +118,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
+    "@types/vscode": "^1.136.0",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
