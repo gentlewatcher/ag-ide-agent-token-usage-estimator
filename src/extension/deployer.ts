@@ -86,9 +86,10 @@ export function deployExtension(options: DeployOptions = {}): void {
     }
   }
 
-  // Copy extension.cjs as extension.js at root for native VS Code loader
+  // Copy extension.cjs to extension folder for native VS Code CommonJS loader
   const cjsSrc = path.join(rootDir, 'dist', 'extension.cjs')
   if (fs.existsSync(cjsSrc)) {
+    fs.copyFileSync(cjsSrc, path.join(targetExtDir, 'extension.cjs'))
     fs.copyFileSync(cjsSrc, path.join(targetExtDir, 'extension.js'))
   }
 

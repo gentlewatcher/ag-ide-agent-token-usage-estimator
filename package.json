@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Real-time pre-execution token/tool estimations, model quota indicators, and settings dashboard for Antigravity IDE",
   "type": "module",
-  "main": "./extension.js",
+  "main": "./extension.cjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/gentlewatcher/ag-ide-agent-token-usage-estimator.git"
